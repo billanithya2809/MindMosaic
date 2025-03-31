@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Journal - MindMosaic</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(to bottom right, #e0f7fa, #fceff9);
+      color: #333;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: #5c6ac4;
+    }
+
+    .brand p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    .nav-links a {
+      margin-left: 1rem;
+      color: #5c6ac4;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    textarea {
+      width: 90%;
+      max-width: 700px;
+      height: 180px;
+      padding: 1rem;
+      font-size: 1rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin-top: 1rem;
+    }
+
+    button {
+      margin-top: 1rem;
+      padding: 0.7rem 1.5rem;
+      background-color: #7e57c2;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background-color: #6749a1;
+    }
+
+    .feedback {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 15px;
+      background-color: rgba(255, 255, 255, 0.85);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .feedback.positive { color: green; }
+    .feedback.negative { color: crimson; }
+    .feedback.neutral { color: #795548; }
+
+    .history {
+      margin-top: 2rem;
+      text-align: left;
+    }
+
+    .entry {
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .entry-actions button {
+      margin-right: 0.5rem;
+      background-color: #5c6ac4;
+      color: white;
+      border: none;
+      padding: 0.3rem 0.7rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .entry-actions button:hover {
+      background-color: #6749a1;
+    }
+
+    .word-count {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="brand">
+      <h1>MindMosaic</h1>
+      <p>Your mind matters</p>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="sentiment.html">Sentiment Check</a>
+      <a href="resources.html">Resources</a>
+      <a href="checkin.html">Daily Check-In</a>
+      <a href="journal.html">Journal</a>
+      <a href="calm.html">Calming Space</a>
+      <a href="selfcare.html">Self-Care Plan</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>Your Personal Journal</h1>
+    <p>Write about your thoughts and feelings. We'll reflect back with kindness.</p>
+
+    <textarea id="journalEntry" placeholder="Start writing..." oninput="countWords()"></textarea><br>
+    <div class="word-count" id="wordCount">Words: 0</div>
+    <button onclick="analyzeEntry()">Reflect</button>
+    <button onclick="downloadEntries()">Download Journal</button>
+
+    <div id="feedback" class="feedback" style="display:none;"></div>
+
+    <div class="history">
+      <h2>Your Journal History</h2>
+      <div id="journalHistory"></div>
+    </div>
+  </div>
+
+  <script>
+    const positiveWords = ["happy", "grateful", "love", "excited", "joy", "good", "peaceful", "hopeful"];
+    const negativeWords = ["sad", "anxious", "angry", "depressed", "lonely", "scared", "tired", "hopeless"];
+
+    function analyzeEntry() {
+      const entry = document.getElementById("journalEntry").value.trim().toLowerCase();
+      if (!entry) return alert("Please write something first.");
+
+      let score = 0;
+      const words = entry.split(/\W+/);
+      words.forEach(word => {
+        if (positiveWords.includes(word)) score++;
+        if (negativeWords.includes(word)) score--;
+      });
+
+      let sentiment = "neutral";
+      let feedback = "Thank you for sharing. Writing can be a powerful release.";
+      if (score > 0) {
+        sentiment = "positive";
+        feedback = "You seem to be in a positive space — that's beautiful. Keep nurturing it!";
+      } else if (score < 0) {
+        sentiment = "negative";
+        feedback = "It sounds like you're going through something heavy. You're not alone.";
+      }
+
+      const feedbackDiv = document.getElementById("feedback");
+      feedbackDiv.textContent = feedback;
+      feedbackDiv.className = "feedback " + sentiment;
+      feedbackDiv.style.display = "block";
+
+      autoSave(entry, sentiment);
+      loadHistory();
+    }
+
+    function autoSave(text, sentiment) {
+      const journal = JSON.parse(localStorage.getItem("journalHistory") || "[]");
+      journal.push({ date: new Date().toLocaleString(), text, sentiment });
+      localStorage.setItem("journalHistory", JSON.stringify(journal));
+    }
+
+    function loadHistory() {
+      const historyDiv = document.getElementById("journalHistory");
+      historyDiv.innerHTML = "";
+      const journal = JSON.parse(localStorage.getItem("journalHistory") || "[]");
+
+      journal.forEach((entry, index) => {
+        historyDiv.innerHTML += `
+          <div class="entry">
+            <strong>${entry.date} (${entry.sentiment})</strong>
+            <p>${entry.text}</p>
+            <div class="entry-actions">
+              <button onclick="editEntry(${index})">Edit</button>
+              <button onclick="deleteEntry(${index})">Delete</button>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function editEntry(index) {
+      const journal = JSON.parse(localStorage.getItem("journalHistory") || "[]");
+      document.getElementById("journalEntry").value = journal[index].text;
+    }
+
+    function deleteEntry(index) {
+      if (confirm("Delete this entry?")) {
+        const journal = JSON.parse(localStorage.getItem("journalHistory") || "[]");
+        journal.splice(index, 1);
+        localStorage.setItem("journalHistory", JSON.stringify(journal));
+        loadHistory();
+      }
+    }
+
+    function downloadEntries() {
+      const journal = JSON.parse(localStorage.getItem("journalHistory") || "[]");
+      let content = "My Journal Entries:\n\n";
+      journal.forEach(entry => {
+        content += `${entry.date} (${entry.sentiment}):\n${entry.text}\n\n`;
+      });
+      const blob = new Blob([content], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "My_Journal.txt";
+      link.click();
+    }
+
+    function countWords() {
+      const text = document.getElementById("journalEntry").value.trim();
+      const count = text ? text.split(/\s+/).length : 0;
+      document.getElementById("wordCount").textContent = `Words: ${count}`;
+    }
+
+    window.onload = loadHistory;
+  </script>
+
+</body>
+</html>

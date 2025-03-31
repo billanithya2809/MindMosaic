@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MindMosaic - Mental Health Resources</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(to bottom right, #e0f7fa, #fceff9);
+      color: #333;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: #5c6ac4;
+    }
+
+    .brand p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    .nav-links a {
+      margin-left: 1rem;
+      color: #5c6ac4;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      color: #5c6ac4;
+      margin-bottom: 1rem;
+    }
+
+    .search-box {
+      margin: 1rem 0;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 0.7rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .tab {
+      margin: 0 0.5rem;
+      padding: 0.5rem 1rem;
+      background-color: #7e57c2;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .tab.active {
+      background-color: #5c6ac4;
+    }
+
+    .section {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 1.5rem;
+      margin: 1rem 0;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      text-align: left;
+    }
+
+    ul, ol {
+      padding-left: 1.2rem;
+    }
+
+    a {
+      color: #5c6ac4;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .helpline {
+      background-color: #fff3cd;
+      padding: 1rem;
+      border-left: 5px solid #ffc107;
+      margin-top: 1rem;
+      border-radius: 10px;
+    }
+
+    .save-btn {
+      background-color: #5c6ac4;
+      color: white;
+      border: none;
+      padding: 0.3rem 0.7rem;
+      border-radius: 5px;
+      margin-left: 0.5rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="brand">
+      <h1>MindMosaic</h1>
+      <p>Your mind matters</p>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="sentiment.html">Sentiment Check</a>
+      <a href="resources.html">Resources</a>
+      <a href="checkin.html">Daily Check-In</a>
+      <a href="journal.html">Journal</a>
+      <a href="calm.html">Calming Space</a>
+      <a href="selfcare.html">Self-Care Plan</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>Mental Health Resources</h1>
+    <p>Explore helpful content, tools, and support services. You’re not alone 💜</p>
+
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search resources...">
+    </div>
+
+    <div class="tabs">
+      <div class="tab active" onclick="showTab('articles')">📚 Articles</div>
+      <div class="tab" onclick="showTab('videos')">🎥 Videos</div>
+      <div class="tab" onclick="showTab('exercises')">🧘 Exercises</div>
+      <div class="tab" onclick="showTab('helplines')">📞 Helplines</div>
+      <div class="tab" onclick="showTab('saved')">⭐ Saved</div>
+    </div>
+
+    <div id="content"></div>
+  </div>
+
+  <script>
+    const resources = {
+      articles: [
+        { title: "Understanding Mental Health Conditions – NAMI", url: "https://www.nami.org/Your-Journey/Mental-Health-Conditions" },
+        { title: "Mental Health Info Center – MHA", url: "https://www.mhanational.org/mental-health-information" },
+        { title: "Psychology Basics – Psychology Today", url: "https://www.psychologytoday.com/us/basics" }
+      ],
+      videos: [
+        { title: "10-Minute Guided Meditation for Anxiety", url: "https://www.youtube.com/watch?v=ZToicYcHIOU" },
+        { title: "Deep Sleep Relaxation Music", url: "https://www.youtube.com/watch?v=MIr3RsUWrdo" },
+        { title: "Box Breathing Exercise – Navy SEAL technique", url: "https://www.youtube.com/watch?v=inpok4MKVLM" }
+      ],
+      exercises: [
+        "🌬️ Try deep breathing: 4 seconds in, 4 hold, 4 out",
+        "✍️ Journal your thoughts each night for 5 mins",
+        "🚶 Take a 10-minute mindful walk – observe sounds and sights",
+        "🕯️ Try sensory grounding: 5 see, 4 feel, 3 hear, 2 smell, 1 taste"
+      ],
+      helplines: [
+        { title: "USA National Suicide & Crisis Lifeline - 988", url: "https://988lifeline.org" },
+        { title: "Crisis Text Line - Text HELLO to 741741", url: "https://www.crisistextline.org" },
+        { title: "International Hotlines", url: "https://www.opencounseling.com/suicide-hotlines" }
+      ]
+    };
+
+    function showTab(tab) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      event.target.classList.add('active');
+      const content = document.getElementById('content');
+      content.innerHTML = '';
+      const search = document.getElementById('searchInput').value.toLowerCase();
+
+      if (tab === 'articles' || tab === 'videos' || tab === 'helplines') {
+        resources[tab].forEach(item => {
+          if (item.title.toLowerCase().includes(search)) {
+            content.innerHTML += `<div class="section"><a href="${item.url}" target="_blank">${item.title}</a>
+            <button class="save-btn" onclick="saveResource('${item.title}', '${item.url}')">⭐ Save</button></div>`;
+          }
+        });
+      }
+
+      if (tab === 'exercises') {
+        resources.exercises.forEach(item => {
+          if (item.toLowerCase().includes(search)) {
+            content.innerHTML += `<div class="section">${item}</div>`;
+          }
+        });
+      }
+
+      if (tab === 'saved') {
+        const saved = JSON.parse(localStorage.getItem('savedResources') || '[]');
+        if (saved.length === 0) {
+          content.innerHTML = '<div class="section">No saved resources yet.</div>';
+        } else {
+          saved.forEach(item => {
+            content.innerHTML += `<div class="section"><a href="${item.url}" target="_blank">${item.title}</a></div>`;
+          });
+        }
+      }
+    }
+
+    function saveResource(title, url) {
+      let saved = JSON.parse(localStorage.getItem('savedResources') || '[]');
+      if (!saved.find(r => r.url === url)) {
+        saved.push({ title, url });
+        localStorage.setItem('savedResources', JSON.stringify(saved));
+        alert('Resource saved!');
+      } else {
+        alert('Already saved.');
+      }
+    }
+
+    document.getElementById('searchInput').addEventListener('input', () => {
+      const activeTab = document.querySelector('.tab.active').textContent.trim().split(' ')[1].toLowerCase();
+      showTab(activeTab);
+    });
+
+    window.onload = () => showTab('articles');
+  </script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MindMosaic - Your Mind Matters</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(to bottom right, #fbe4f5, #e0f7fa);
+      color: #333;
+      transition: background 0.5s ease;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: #5c6ac4;
+    }
+
+    .brand p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    .nav-links a {
+      margin-left: 1rem;
+      color: #5c6ac4;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    section {
+      margin: 2rem 0;
+      padding: 1.5rem;
+      border-radius: 20px;
+      background-color: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    h2 {
+      color: #7e57c2;
+      margin-bottom: 0.5rem;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      padding: 0.5rem 0;
+      color: #444;
+    }
+
+    .chat-icon {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #7e57c2;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .chat-icon:hover {
+      transform: scale(1.05);
+    }
+
+    .chat-icon img {
+      width: 30px;
+      height: 30px;
+      filter: invert(1);
+    }
+
+    .tools {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .tool-card {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 1rem;
+      border-radius: 15px;
+      width: 200px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      text-decoration: none;
+      color: #333;
+      transition: transform 0.3s ease;
+    }
+
+    .tool-card:hover {
+      transform: scale(1.05);
+    }
+
+    .tool-card h3 {
+      margin: 0.5rem 0;
+      color: #5c6ac4;
+    }
+
+    .status, .affirmation, .gratitude {
+      margin-top: 2rem;
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 1rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .theme-toggle {
+      margin-top: 1rem;
+      background: #7e57c2;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="brand">
+      <h1>MindMosaic</h1>
+      <p>Your mind matters</p>
+    </div>
+    <div class="nav-links">
+      <a href="sentiment.html">Sentiment Check</a>
+      <a href="resources.html">Resources</a>
+      <a href="checkin.html">Daily Check-In</a>
+      <a href="journal.html">Journal</a>
+      <a href="calm.html">Calming Space</a>
+      <a href="selfcare.html">Self-Care Plan</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <header>
+      <h1 id="greeting">Welcome Back</h1>
+      <p class="subtitle">Take a step toward understanding and nurturing your mental well-being.</p>
+    </header>
+
+    <section class="affirmation" id="affirmation">💬 You are enough. You are doing your best.</section>
+
+    <section class="intro">
+      <h2>Why Mental Health Matters</h2>
+      <p>Mental health is just as important as physical health. It's okay to not be okay. Understanding your emotions is the first step toward healing.</p>
+    </section>
+
+    <section class="stats">
+      <h2>Did You Know?</h2>
+      <ul>
+        <li>1 in 4 people will be affected by mental or neurological disorders at some point in their lives.</li>
+        <li>Over 300 million people suffer from depression globally.</li>
+        <li>Talking helps – early support makes a difference.</li>
+      </ul>
+    </section>
+
+    <section class="invite">
+      <h2>Check In With Yourself</h2>
+      <p>Try our <a href="sentiment.html">Sentiment Checker</a> and start your journey to better understanding your emotions.</p>
+    </section>
+
+    <h2>Explore Your Tools</h2>
+    <div class="tools">
+      <a href="sentiment.html" class="tool-card">
+        <h3>💬 Sentiment Check</h3>
+        <p>Analyze how you're feeling today.</p>
+      </a>
+      <a href="resources.html" class="tool-card">
+        <h3>📚 Resources</h3>
+        <p>Helpful articles, videos & exercises.</p>
+      </a>
+      <a href="checkin.html" class="tool-card">
+        <h3>📊 Daily Check-In</h3>
+        <p>Track your mood over time.</p>
+      </a>
+      <a href="journal.html" class="tool-card">
+        <h3>📝 Journal</h3>
+        <p>Write and reflect your thoughts.</p>
+      </a>
+      <a href="calm.html" class="tool-card">
+        <h3>🌿 Calming Space</h3>
+        <p>Relax with music & breathing.</p>
+      </a>
+      <a href="selfcare.html" class="tool-card">
+        <h3>💖 Self-Care Plan</h3>
+        <p>Plan small actions to care for yourself.</p>
+      </a>
+    </div>
+
+    <div class="status">
+      <h3>📅 Today's Reflection</h3>
+      <p id="reflection">No recent journal entry.</p>
+    </div>
+
+    <div class="gratitude">
+      <h3>🙏 Gratitude Prompt</h3>
+      <input type="text" id="gratitudeInput" placeholder="One thing you're grateful for..." />
+      <button onclick="saveGratitude()">Save</button>
+      <p id="gratitudeMsg"></p>
+    </div>
+
+    <button class="theme-toggle" onclick="toggleTheme()">🎨 Change Background</button>
+  </div>
+
+  <div class="chat-icon" onclick="window.location.href='chatbot.html'">
+    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="Chat Icon">
+  </div>
+
+  <script>
+    const greeting = document.getElementById("greeting");
+    const hour = new Date().getHours();
+    const name = localStorage.getItem("username") || "Friend";
+
+    if (hour < 12) greeting.textContent = `Good Morning, ${name}!`;
+    else if (hour < 18) greeting.textContent = `Good Afternoon, ${name}!`;
+    else greeting.textContent = `Good Evening, ${name}!`;
+
+    const affirmations = [
+      "You are enough. You are doing your best.",
+      "You’ve survived 100% of your hardest days.",
+      "You are growing at your own pace.",
+      "Your feelings are valid.",
+      "Today is a fresh start."
+    ];
+
+    document.getElementById("affirmation").textContent = affirmations[Math.floor(Math.random() * affirmations.length)];
+
+    const reflection = document.getElementById("reflection");
+    const journal = JSON.parse(localStorage.getItem("journalHistory") || "[]");
+    if (journal.length) {
+      reflection.textContent = `"${journal[journal.length-1].text.slice(0, 100)}..."`;
+    }
+
+    function saveGratitude() {
+      const input = document.getElementById("gratitudeInput");
+      if (input.value.trim() !== "") {
+        localStorage.setItem("gratitude", input.value);
+        document.getElementById("gratitudeMsg").textContent = "✨ Gratitude saved!";
+        input.value = "";
+      }
+    }
+
+    function toggleTheme() {
+      const colors = [
+        "linear-gradient(to bottom right, #fbe4f5, #e0f7fa)",
+        "linear-gradient(to bottom right, #ffe0e9, #d7f9f3)",
+        "linear-gradient(to bottom right, #f3e5f5, #d7f9f3)"
+      ];
+      const current = document.body.style.background;
+      const next = colors[(colors.indexOf(current) + 1) % colors.length] || colors[0];
+      document.body.style.background = next;
+    }
+
+    if (Notification.permission !== "granted") {
+      Notification.requestPermission();
+    } else {
+      setTimeout(() => {
+        new Notification("🌸 MindMosaic Reminder", { body: "Take 2 minutes to check in with yourself today." });
+      }, 3000);
+    }
+  </script>
+
+</body>
+</html>
